@@ -1,7 +1,7 @@
 <footer>
       <div class="container">
         <div class="description">
-          <img class="logo" src="./template/assets/images/logo.png" alt="logo" />
+          <img class="logo" src="./template/assets/images/logo-1.png"  alt="logo" />
           <p>
             Lorem ipsum dolor, sit amet consectetur adipisicing elit. Nisi ipsa
             explicabo sequi enim voluptatibus facilis!

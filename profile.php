@@ -3,6 +3,8 @@ session_start() ;
 
 if (isset($_SESSION['id'])){
 
+$id = intval($_SESSION['id']) ;
+
 ?>
     <!-- Strat header  -->
       <?php
@@ -28,7 +30,6 @@ if (isset($_SESSION['id'])){
         <div class="edit-container">
             <!-- Start profile tab   -->
             <?php
-            $id = intval($_SESSION['id']) ;
             $profile_query = $conn->prepare("SELECT * FROM utilisateur WHERE ID_user = $id ") ;
             $profile_query->execute() ;
             $user = $profile_query->fetch() ;
@@ -71,6 +72,14 @@ if (isset($_SESSION['id'])){
 
             <!-- Start reservation tab   -->
             <div data-section="reservation" class="container section-tab show">
+                <?php
+                $reserve_query = $conn->prepare("SELECT re.* , mar.Intitule_Marque  , er.Intitule_EtatRes
+                 FROM reservation re , marque mar , voiture v , etat_res er
+                 WHERE re.Id_EtatRes = er.Id_EtatRes AND re.Id_vehicule = v.Id_vehicule
+                 AND mar.Id_marque = v.Id_marque AND ID_client = $id ORDER BY id_reservation  ") ;
+                $reserve_query->execute() ;
+                $reservations = $reserve_query->fetchAll() ;
+                ?>
                 <table class="table-reservation">
                     <thead>
                         <th>N resevation</th>
@@ -78,33 +87,30 @@ if (isset($_SESSION['id'])){
                         <th>Date début </th>
                         <th>Date fin </th>
                         <th>Vihcule </th>
+                        <th>Etat</th>
                         <th>Contrat </th>
                     </thead>
                     <tbody>
+                        <?php
+                        foreach($reservations as $reservation){
+                        ?>
                         <tr>
-                            <td>1200</td>
-                            <td>12-01-2023</td>
-                            <td>12-01-2023</td>
-                            <td>12-01-2023</td>
-                            <td>Dacia</td>
-                            <td><a class="btn-download" href="#">Telecharger</a></td>
+                            <td><?= $reservation['id_reservation'] ?></td>
+                            <td><?= $reservation['date_Reservation'] ?></td>
+                            <td><?= $reservation['DateDebutR'] ?></td>
+                            <td><?= $reservation['DateFinR'] ?></td>
+                            <td><?= $reservation['Intitule_Marque'] ?></td>
+                            <td><?= $reservation['Intitule_EtatRes'] ?></td>
+                            <td>
+                                <?php if($reservation['Intitule_EtatRes'] == "success" ){ ?>
+                                    <a class="btn-download" href="#">Telecharger</a>
+                                <?php } else {
+                                    echo "--" ;
+                                }
+                                ?>
+                            </td>
                         </tr>
-                        <tr>
-                            <td>1200</td>
-                            <td>12-01-2023</td>
-                            <td>12-01-2023</td>
-                            <td>12-01-2023</td>
-                            <td>Dacia</td>
-                            <td><a class="btn-download" href="#">Telecharger</a></td>
-                        </tr>
-                        <tr>
-                            <td>1200</td>
-                            <td>12-01-2023</td>
-                            <td>12-01-2023</td>
-                            <td>12-01-2023</td>
-                            <td>Dacia</td>
-                            <td><a class="btn-download" href="#">Telecharger</a></td>
-                        </tr>
+                        <?php } ?>
                     </tbody>
                 </table>
             </div>

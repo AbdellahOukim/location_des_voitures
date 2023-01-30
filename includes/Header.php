@@ -29,7 +29,7 @@ $user = $query->fetch() ;
     <header data-header>
           <div class="container">
             <a href="./index.php">
-              <img src="./template/assets/images/logo.png" alt="logo" class="logo" />
+              <img src="./template/assets/images/logo-1.png" alt="logo" class="logo" />
             </a>
             <nav>
             <?php

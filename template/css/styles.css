@@ -212,7 +212,7 @@ ul {
 
 header {
   width: 100%;
-  padding: 15px 0;
+  padding: 10px 0;
   color: #fff;
   position: absolute;
   left: 0;
@@ -253,7 +253,8 @@ header .container {
 }
 
 .logo {
-  width: 100px;
+  /* width: 100px; */
+  height: 50px;
 }
 
 header nav {
@@ -773,7 +774,9 @@ footer .copy-right i {
 }
 
 .edit-container {
+  width: 100%;
   padding: 40px 0;
+  overflow-x: auto;
 }
 
 .edit-container form {
@@ -821,8 +824,10 @@ footer .copy-right i {
 }
 
 .table-reservation {
-  margin-left: 20px;
+  font-size: 14px;
+  margin-inline: 20px;
   width: 100%;
+  min-width: 750px;
   text-align: center;
   background-color: rgb(252, 252, 252);
   border: 1px solid #999;
@@ -831,7 +836,7 @@ footer .copy-right i {
 
 .table-reservation th ,
 .table-reservation td {
-  padding: 10px 20px;
+  padding: 8px 10px;
   border: 1px solid #999;
 }
 

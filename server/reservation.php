@@ -44,34 +44,37 @@ if
  if (empty($passport_client)) {
     $passport_client = null ;
  }
+
 //  insert into table client 
 
- $insert_client = $conn->prepare("INSERT INTO `client`(`ID_client`, `nom`, `prenom`, `email`, `tel`,`Num_Passeport`, `Num_Permi_de_conduite`, `date_validite`,
-  `id_ville`, `Login`, `Mot_de_passe`) 
-  VALUES (null,'$nom_client','$prenom_client','$email_client',
-  '$tel_client','$passport_client','$permis_client','$date_valide',$id_ville,'$login','$mot_de_passe')") ;
- $insert_client->execute() ;
- $count = $insert_client->rowCount() ;
+ $check_client = $conn->prepare("SELECT * FROM client WHERE ID_client = $id ") ;
+ $check_client->execute() ;
+ $count_client = $check_client->rowCount() ;
 
- if ($count > 0) {
-    // insert reservation 
-
-    $reserve_quey = $conn->prepare("INSERT INTO `reservation`(`id_reservation`, `ID_client`, `Id_vehicule`, `date_Reservation`, `DateDebutR`,
-     `DateFinR`, `PrixParJour`, `remarque`, `Id_EtatRes`) 
-     VALUES (null,null,$id_voiture,null,'$date_debut',
-     '$date_fin','$prix_jour',null,null)") ;
-    $reserve_quey->execute() ;
-    $count_res = $reserve_quey->rowCount() ;
-
-    if ($count_res > 0){
-        print_r(json_encode(["err" => false , "content" => "Merci ! votre demande à encore de traitement ! " ])) ;
-    } else {
-        print_r(json_encode(["err" => true , "content" => "Merci de ressayer ! " ])) ;
-    }
-
- } else {
-    print_r(json_encode(["err" => true , "content" => "Echoue merci de ressayer  !" ])) ;
+ if ($count_client <= 0 ) {
+    $insert_client = $conn->prepare("INSERT INTO `client`(`ID_client`, `nom`, `prenom`, `email`, `tel`,`Num_Passeport`, `Num_Permi_de_conduite`, `date_validite`,
+    `id_ville`, `Login`, `Mot_de_passe`) 
+    VALUES ($id ,'$nom_client','$prenom_client','$email_client',
+    '$tel_client','$passport_client','$permis_client','$date_valide',$id_ville,'$login','$mot_de_passe')") ;
+   $insert_client->execute() ;
+   $count = $insert_client->rowCount() ;
  }
+
+// insert reservation 
+
+$reserve_quey = $conn->prepare("INSERT INTO `reservation`(`id_reservation`, `ID_client`, `Id_vehicule`, `date_Reservation`, `DateDebutR`,
+    `DateFinR`, `PrixParJour`, `remarque`, `Id_EtatRes`) 
+    VALUES (null,$id ,$id_voiture,CURRENT_DATE,'$date_debut',
+    '$date_fin','$prix_jour',null,1)") ;
+$reserve_quey->execute() ;
+$count_res = $reserve_quey->rowCount() ;
+
+if ($count_res > 0){
+    print_r(json_encode(["err" => false , "content" => "Merci ! votre demande à encore de traitement ! " ])) ;
+} else {
+    print_r(json_encode(["err" => true , "content" => "Merci de ressayer ! " ])) ;
+}
+
 
 
 } else {
