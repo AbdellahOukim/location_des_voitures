@@ -33,10 +33,10 @@ else {
         <form>
           <div class="error"></div>
           <label for="email">Email :</label>
-          <input type="email" id="email" name="email" placeholder="Saisir votre email" />
+          <input required type="email" id="email" name="email" placeholder="Saisir votre email" />
 
           <label for="password">Mot de passe :</label>
-          <input type="password" id="password" name="password" placeholder="Saisir votre mot de passe" />
+          <input required type="password" id="password" name="password" placeholder="Saisir votre mot de passe" />
 
           <button type="submit">Se connecter</button>
         </form>
@@ -63,8 +63,15 @@ else {
         .then((resp) => resp.json() )
         .then((data) => {
           if (data.err) {
-            error.style.display = "block" ;
-            error.textContent = data.content ;
+            // error.style.display = "block" ;
+            // error.textContent = data.content ;
+            Swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: 'Email ou mot de passe incorrect ! ',
+              showConfirmButton: false,
+              timer: 2500
+            })
           } else {
             document.location = "index.php" ;
           }

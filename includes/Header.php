@@ -23,6 +23,7 @@ $user = $query->fetch() ;
       crossorigin="anonymous"
     ></script>
     <script defer src="template/js/script.js"></script>
+    <script defer src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   </head>
   <body>
     <header data-header>
@@ -34,11 +35,7 @@ $user = $query->fetch() ;
             <?php
                 if (isset($_SESSION['id'])) {
             ?>
-              <a href="#">
-                <span class="user-name" style="margin-right : 5px">Mes reservation</span>
-                <i class="fa-solid fa-cart-shopping"></i>
-              </a>
-              <a href="#">
+              <a href="./profile.php">
                 <span class="user-name" style="margin-right : 5px"><?= $user['Nom_user'] . " " . $user['Prenom_user']  ?></span>
                 <i class="fa-solid fa-user-tie"></i>
               </a>

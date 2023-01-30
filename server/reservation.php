@@ -64,7 +64,7 @@ if
     $count_res = $reserve_quey->rowCount() ;
 
     if ($count_res > 0){
-        print_r(json_encode(["err" => false , "content" => "" ])) ;
+        print_r(json_encode(["err" => false , "content" => "Merci ! votre demande à encore de traitement ! " ])) ;
     } else {
         print_r(json_encode(["err" => true , "content" => "Merci de ressayer ! " ])) ;
     }

@@ -72,8 +72,15 @@ else {
         .then((resp) => resp.json() )
         .then((data) => {
           if (data.err) {
-            error.style.display = "block" ;
-            error.textContent = data.content ;
+            // error.style.display = "block" ;
+            // error.textContent = data.content ;
+            Swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: data.content ,
+              showConfirmButton: false,
+              timer: 2500
+            })
           } else {
             document.location = "login.php" ;
           }

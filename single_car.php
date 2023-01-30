@@ -220,13 +220,26 @@ if (isset($_SESSION["id"])) :
         .then((resp) => resp.json() )
         .then((data) => {
           if (data.err) {
-            message.style.display = "block" ;
-            message.className = "error" ;
-            message.textContent = data.content ;
+            // message.style.display = "block" ;
+            // message.className = "error" ;
+            // message.textContent = data.content ;
+            Swal.fire({
+              position: 'center',
+              icon: 'error',
+              title: data.content ,
+              showConfirmButton: false,
+              timer: 2500
+            })
           } else {
             // redirect *
-            message.style.display = "block" ;
-            message.textContent = data.content ;
+            // message.style.display = "block" ;
+            // message.textContent = data.content ;
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: data.content ,
+              showConfirmButton: true
+            })
           }
         } )
         .catch((err)=> console.log(err)) ;
