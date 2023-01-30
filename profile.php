@@ -153,7 +153,7 @@ $user = $query->fetch() ;
                             <td><?= $reservation['Intitule_EtatRes'] ?></td>
                             <td>
                                 <?php if($reservation['Intitule_EtatRes'] == "success" ){ ?>
-                                    <a class="btn-download" href="#">Telecharger</a>
+                                    <a class="btn-download" href="contrat.php?id=<?= $reservation['id_reservation'] ?>">Telecharger</a>
                                 <?php } else {
                                     echo "--" ;
                                 }
