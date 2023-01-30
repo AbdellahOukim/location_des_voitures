@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : dim. 29 jan. 2023 à 19:08
+-- Généré le : lun. 30 jan. 2023 à 17:52
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -55,15 +55,16 @@ CREATE TABLE IF NOT EXISTS `client` (
   `Mot_de_passe` varchar(50) DEFAULT NULL,
   PRIMARY KEY (`ID_client`),
   KEY `id_ville` (`id_ville`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `client`
 --
 
 INSERT INTO `client` (`ID_client`, `nom`, `prenom`, `email`, `tel`, `Num_Passeport`, `Num_Permi_de_conduite`, `date_validite`, `id_ville`, `Login`, `Mot_de_passe`) VALUES
-(5, 'oukim', 'abdellah', 'abdo.oukim@gmail.com', '0653063013', 'CF12002', 'JM20000', '2023-02-02', 3, 'abdo.oukim@gmail.com', '12345'),
-(6, 'Ahmed', 'Mohammed', 'ahmed@gmail.com', '0655056788', 'CF12003', 'JM20002', '2023-02-05', 4, 'ahmed@gmail.com', '123456');
+(1, 'oukim', 'abdellah', 'abdo.oukim@gmail.com', '0653063013', 'CF12002', 'JM20000', '2023-01-27', 10, 'abdo.oukim@gmail.com', '12345'),
+(4, 'Ahmed', 'Mohammed', 'ahmed@gmail.com', '0655056788', '', 'JM30000', '2024-05-20', 14, 'ahmed@gmail.com', '123456'),
+(5, 'oukim', 'younnes', 'younnes@gmail.com', '0644553322', 'CF1200', 'JM33400', '2025-06-30', 11, 'younnes@gmail.com', '12345');
 
 -- --------------------------------------------------------
 
@@ -136,9 +137,18 @@ CREATE TABLE IF NOT EXISTS `contrat_assurance` (
 DROP TABLE IF EXISTS `etat_res`;
 CREATE TABLE IF NOT EXISTS `etat_res` (
   `Id_EtatRes` int(11) NOT NULL AUTO_INCREMENT,
-  `Intitulé_EtatRes` varchar(40) DEFAULT NULL,
+  `Intitule_EtatRes` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`Id_EtatRes`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `etat_res`
+--
+
+INSERT INTO `etat_res` (`Id_EtatRes`, `Intitule_EtatRes`) VALUES
+(1, 'en cours'),
+(2, 'success'),
+(3, 'échoué');
 
 -- --------------------------------------------------------
 
@@ -169,7 +179,7 @@ CREATE TABLE IF NOT EXISTS `marque` (
   `Id_marque` int(11) NOT NULL AUTO_INCREMENT,
   `Intitule_Marque` varchar(40) DEFAULT NULL,
   PRIMARY KEY (`Id_marque`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `marque`
@@ -179,7 +189,8 @@ INSERT INTO `marque` (`Id_marque`, `Intitule_Marque`) VALUES
 (1, 'Dacia logan'),
 (2, 'Renault'),
 (3, 'Abarth'),
-(4, 'Range rover');
+(4, 'Range rover'),
+(5, 'Audi');
 
 -- --------------------------------------------------------
 
@@ -235,15 +246,20 @@ CREATE TABLE IF NOT EXISTS `reservation` (
   KEY `ID_client` (`ID_client`),
   KEY `Id_EtatRes` (`Id_EtatRes`),
   KEY `Id_vehicule` (`Id_vehicule`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `reservation`
 --
 
 INSERT INTO `reservation` (`id_reservation`, `ID_client`, `Id_vehicule`, `date_Reservation`, `DateDebutR`, `DateFinR`, `PrixParJour`, `remarque`, `Id_EtatRes`) VALUES
-(1, NULL, 5, NULL, '2023-02-03', '2023-03-08', 1300, NULL, NULL),
-(2, NULL, 6, NULL, '2023-01-29', '2023-01-30', 200, NULL, NULL);
+(20, 1, 2, '2023-01-30', '2023-02-02', '2023-02-16', 250, NULL, 2),
+(21, 1, 5, '2023-01-30', '2023-02-10', '2023-02-12', 1300, NULL, 2),
+(22, 4, 4, '2023-01-30', '2023-02-01', '2023-02-03', 700, NULL, 1),
+(23, 1, 8, '2023-01-30', '2023-01-31', '2023-02-01', 350, NULL, 1),
+(24, 5, 8, '2023-01-30', '2023-01-30', '2023-02-01', 350, NULL, 1),
+(25, 5, 7, '2023-01-30', '2023-02-02', '2023-03-03', 300, NULL, 1),
+(26, 1, 4, '2023-01-30', '2023-02-02', '2023-02-05', 700, NULL, 1);
 
 -- --------------------------------------------------------
 
@@ -326,7 +342,7 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `Id_Type_user` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_user`),
   KEY `Id_Type_user` (`Id_Type_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `utilisateur`
@@ -350,7 +366,7 @@ CREATE TABLE IF NOT EXISTS `ville` (
   `Id_pays` int(11) DEFAULT NULL,
   PRIMARY KEY (`ID_ville`),
   KEY `Id_pays` (`Id_pays`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=15 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `ville`
@@ -358,7 +374,17 @@ CREATE TABLE IF NOT EXISTS `ville` (
 
 INSERT INTO `ville` (`ID_ville`, `nom_ville`, `Id_pays`) VALUES
 (3, 'agadir', 1),
-(4, 'casablanca', 1);
+(4, 'casablanca', 1),
+(5, 'tanger', 1),
+(6, 'rabat', 1),
+(7, 'fes', 1),
+(8, 'marrakech', 1),
+(9, 'ouarzazate', 1),
+(10, 'meknes', 1),
+(11, 'essaouira', 1),
+(12, 'beni mellal', 1),
+(13, 'taounat', 1),
+(14, 'el dakhla', 1);
 
 -- --------------------------------------------------------
 
@@ -388,7 +414,7 @@ CREATE TABLE IF NOT EXISTS `voiture` (
   KEY `Id_cat` (`Id_cat`),
   KEY `IdModèle` (`IdModèle`),
   KEY `Id_TypeMoteur` (`Id_TypeMoteur`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `voiture`
@@ -400,7 +426,9 @@ INSERT INTO `voiture` (`Id_vehicule`, `Immatriculation`, `image`, `Id_marque`, `
 (3, 'B6 13455', 'car-3.jpg', 2, NULL, NULL, 1, 2021, 100000, 5, 5, 1200, 200, 0, 0),
 (4, 'B13 2009', 'car-4', 3, NULL, NULL, 3, 2023, 200000, 2, 2, 900, 700, 0, 0),
 (5, 'A1 22000', 'car-5.jpg', 4, NULL, NULL, 2, 2023, 900000, 5, 5, 2000, 1300, 0, 0),
-(6, 'A1 1390', 'car-6.jpg', 2, NULL, NULL, 1, 2021, 90000, 5, 5, 1200, 250, 200, 1);
+(6, 'A1 1390', 'car-6.jpg', 2, NULL, NULL, 1, 2021, 90000, 5, 5, 1200, 250, 200, 1),
+(7, 'A38 20100', 'car-7.jpg', 2, NULL, NULL, 2, 2023, 200000, 5, 5, 1200, 350, 300, 1),
+(8, 'A1 2004', 'car-7.jpg', 5, NULL, NULL, 1, 2021, 200000, 5, 5, 2000, 350, 0, 0);
 
 --
 -- Contraintes pour les tables déchargées

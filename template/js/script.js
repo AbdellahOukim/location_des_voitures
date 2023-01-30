@@ -2,7 +2,9 @@
 const header = document.querySelector("[data-header]") ;
 
 window.addEventListener('scroll' , ()=> {
-    header.classList[scrollY > 100 ? "add" : "remove"]("sticky") ;
+    if (!header.classList.contains("no-sticky")) {
+        header.classList[scrollY > 100 ? "add" : "remove"]("sticky") ;
+    }
 } )
 
 // set the start date 
@@ -47,3 +49,4 @@ if (linksTab){
         })
     })
 }
+

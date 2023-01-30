@@ -78,5 +78,5 @@ if ($count_res > 0){
 
 
 } else {
-    print_r(json_encode(["err" => true , "content" => " Tous le champs * est obligatoire !" ])) ;
+    print_r(json_encode(["err" => true , "content" => " Tous les champs * sont obligatoire !" ])) ;
 }

@@ -82,7 +82,16 @@ else {
               timer: 2500
             })
           } else {
-            document.location = "login.php" ;
+            Swal.fire({
+              position: 'center',
+              icon: 'success',
+              title: data.content ,
+              showConfirmButton: false,
+              timer: 2500
+            })
+            setTimeout(()=> {
+              document.location = "login.php" ;
+            },2600)
           }
         } )
         .catch((err)=> console.log(err)) ;
