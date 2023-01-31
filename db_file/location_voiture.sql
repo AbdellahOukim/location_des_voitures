@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le : lun. 30 jan. 2023 à 17:52
+-- Généré le : mar. 31 jan. 2023 à 22:04
 -- Version du serveur : 5.7.36
 -- Version de PHP : 7.4.26
 
@@ -96,18 +96,29 @@ DROP TABLE IF EXISTS `contrat`;
 CREATE TABLE IF NOT EXISTS `contrat` (
   `id_contrat` int(11) NOT NULL AUTO_INCREMENT,
   `ID_client` int(11) DEFAULT NULL,
-  `DateDébut` date DEFAULT NULL,
+  `DateDebut` date DEFAULT NULL,
   `DateFin` date DEFAULT NULL,
-  `Id_véhicule` int(11) DEFAULT NULL,
-  `Klm_Départ` int(11) DEFAULT NULL,
+  `Id_vehicule` int(11) DEFAULT NULL,
+  `Klm_Depart` int(11) DEFAULT NULL,
   `KlmRetour` int(11) DEFAULT NULL,
-  `Autre_Indemnités` text,
+  `Autre_Indemnites` text,
   `id_reservation` int(11) DEFAULT NULL,
   PRIMARY KEY (`id_contrat`),
   KEY `ID_client` (`ID_client`),
-  KEY `Id_véhicule` (`Id_véhicule`),
+  KEY `Id_véhicule` (`Id_vehicule`),
   KEY `id_reservation` (`id_reservation`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `contrat`
+--
+
+INSERT INTO `contrat` (`id_contrat`, `ID_client`, `DateDebut`, `DateFin`, `Id_vehicule`, `Klm_Depart`, `KlmRetour`, `Autre_Indemnites`, `id_reservation`) VALUES
+(1, 1, '2023-01-19', '2023-01-25', 8, 0, NULL, NULL, 23),
+(2, 1, '2023-01-17', '2023-01-31', 2, 0, 1200, NULL, 20),
+(3, 1, '2023-01-11', '2023-01-28', 5, 0, NULL, NULL, 21),
+(4, 5, '2023-01-04', '2023-01-20', 8, 0, NULL, NULL, 24),
+(5, 5, '2023-01-13', '2023-01-17', 4, 0, NULL, NULL, 28);
 
 -- --------------------------------------------------------
 
@@ -246,7 +257,7 @@ CREATE TABLE IF NOT EXISTS `reservation` (
   KEY `ID_client` (`ID_client`),
   KEY `Id_EtatRes` (`Id_EtatRes`),
   KEY `Id_vehicule` (`Id_vehicule`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=29 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `reservation`
@@ -256,10 +267,12 @@ INSERT INTO `reservation` (`id_reservation`, `ID_client`, `Id_vehicule`, `date_R
 (20, 1, 2, '2023-01-30', '2023-02-02', '2023-02-16', 250, NULL, 2),
 (21, 1, 5, '2023-01-30', '2023-02-10', '2023-02-12', 1300, NULL, 2),
 (22, 4, 4, '2023-01-30', '2023-02-01', '2023-02-03', 700, NULL, 1),
-(23, 1, 8, '2023-01-30', '2023-01-31', '2023-02-01', 350, NULL, 1),
-(24, 5, 8, '2023-01-30', '2023-01-30', '2023-02-01', 350, NULL, 1),
+(23, 1, 8, '2023-01-30', '2023-01-31', '2023-02-01', 350, NULL, 2),
+(24, 5, 8, '2023-01-30', '2023-01-30', '2023-02-01', 350, NULL, 2),
 (25, 5, 7, '2023-01-30', '2023-02-02', '2023-03-03', 300, NULL, 1),
-(26, 1, 4, '2023-01-30', '2023-02-02', '2023-02-05', 700, NULL, 1);
+(26, 1, 4, '2023-01-30', '2023-02-02', '2023-02-05', 700, NULL, 1),
+(27, 5, 6, '2023-01-30', '2023-01-31', '2023-02-02', 200, NULL, 1),
+(28, 5, 4, '2023-01-30', '2023-01-31', '2023-02-02', 700, NULL, 2);
 
 -- --------------------------------------------------------
 
@@ -451,7 +464,7 @@ ALTER TABLE `compagnie_assurance`
 --
 ALTER TABLE `contrat`
   ADD CONSTRAINT `contrat_ibfk_1` FOREIGN KEY (`ID_client`) REFERENCES `client` (`ID_client`),
-  ADD CONSTRAINT `contrat_ibfk_2` FOREIGN KEY (`Id_véhicule`) REFERENCES `voiture` (`Id_vehicule`),
+  ADD CONSTRAINT `contrat_ibfk_2` FOREIGN KEY (`Id_vehicule`) REFERENCES `voiture` (`Id_vehicule`),
   ADD CONSTRAINT `contrat_ibfk_3` FOREIGN KEY (`id_reservation`) REFERENCES `reservation` (`id_reservation`);
 
 --

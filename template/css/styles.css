@@ -314,7 +314,7 @@ header .btn-toggler i {
 
 .hero.profile {
   background-image: url("../assets/images/profile-bg.jpg");
-  max-height: 300px;
+  max-height: 350px;
 }
 
 .hero::after {
